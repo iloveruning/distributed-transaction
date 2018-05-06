@@ -1,7 +1,8 @@
 package com.iflytek.lcnorder.mapper;
 
-import com.iflytek.lcnorder.entity.Order;
+
 import com.baomidou.mybatisplus.mapper.BaseMapper;
+import com.iflytek.lcnorder.entity.Orders;
 
 /**
  * <p>
@@ -11,6 +12,6 @@ import com.baomidou.mybatisplus.mapper.BaseMapper;
  * @author llchen12
  * @since 2018-05-03
  */
-public interface OrderMapper extends BaseMapper<Order> {
+public interface OrderMapper extends BaseMapper<Orders> {
 
 }

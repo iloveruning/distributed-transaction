@@ -1,4 +1,4 @@
-package com.iflytek.lcnproduct.config;
+package com.iflytek.lcnaccount.config;
 
 
 import com.baomidou.mybatisplus.plugins.PaginationInterceptor;
@@ -8,7 +8,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-@MapperScan("com.iflytek.lcnproduct.mapper")
+@MapperScan(basePackages = "com.iflytek.lcnaccount.mapper")
 public class MybatisPlusConfig {
 
 

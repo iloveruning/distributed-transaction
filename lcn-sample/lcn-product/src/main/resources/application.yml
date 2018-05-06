@@ -8,9 +8,11 @@ spring:
         type: com.alibaba.druid.pool.DruidDataSource
         driverClassName: com.mysql.jdbc.Driver
         druid:
-            url: jdbc:mysql://172.16.154.26:3306/test_distributed_transaction?useUnicode=true&characterEncoding=utf-8
+            #url: jdbc:mysql://172.16.154.26:3306/test_distributed_transaction?useUnicode=true&characterEncoding=utf-8
+            url: jdbc:mysql://127.0.0.1:3306/product?useSSL=true
             username: root
-            password: imsp_vcloud
+            #password: imsp_vcloud
+            password: cll123456
 
             initial-size: 2
             max-active: 10
@@ -85,14 +87,14 @@ mybatis-plus:
     #数据库大写下划线转换
     #capital-mode: true
     #序列接口实现类配置,不在推荐使用此方式进行配置,请使用自定义bean注入
-    key-generator: com.baomidou.mybatisplus.incrementer.H2KeyGenerator
+    #key-generator: com.baomidou.mybatisplus.incrementer.H2KeyGenerator
     #逻辑删除配置（下面3个配置）
     #logic-delete-value: 0
     #logic-not-delete-value: 1
     #自定义sql注入器,不在推荐使用此方式进行配置,请使用自定义bean注入
     #sql-injector: com.baomidou.mybatisplus.mapper.LogicSqlInjector
     #自定义填充策略接口实现,不在推荐使用此方式进行配置,请使用自定义bean注入
-    meta-object-handler: com.baomidou.springboot.MyMetaObjectHandler
+    #meta-object-handler: com.baomidou.springboot.MyMetaObjectHandler
     #自定义SQL注入器
     #sql-injector: com.baomidou.springboot.xxx
     # SQL 解析缓存，开启后多租户 @SqlParser 注解生效

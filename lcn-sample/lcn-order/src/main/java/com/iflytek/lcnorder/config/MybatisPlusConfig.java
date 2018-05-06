@@ -8,7 +8,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-@MapperScan("com.iflytek.lcnorder.mapper*")
+@MapperScan(basePackages = "com.iflytek.lcnorder.mapper")
 public class MybatisPlusConfig {
 
 

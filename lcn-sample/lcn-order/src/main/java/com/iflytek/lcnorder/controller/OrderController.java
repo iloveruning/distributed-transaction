@@ -1,7 +1,8 @@
 package com.iflytek.lcnorder.controller;
 
 
-import com.iflytek.lcnorder.entity.Order;
+
+import com.iflytek.lcnorder.entity.Orders;
 import com.iflytek.lcnorder.service.IOrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -26,8 +27,9 @@ public class OrderController {
     private IOrderService orderService;
 
     @PostMapping("/place")
-    public String placeOrder(@RequestBody Order order){
+    public String placeOrder(@RequestBody Orders order){
 
+        System.out.println(order);
         orderService.placeOrder(order);
         return "SUCCESSFUL!";
     }

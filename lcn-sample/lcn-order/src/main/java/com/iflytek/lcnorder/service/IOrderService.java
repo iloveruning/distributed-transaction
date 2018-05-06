@@ -1,7 +1,8 @@
 package com.iflytek.lcnorder.service;
 
-import com.iflytek.lcnorder.entity.Order;
+
 import com.baomidou.mybatisplus.service.IService;
+import com.iflytek.lcnorder.entity.Orders;
 
 /**
  * <p>
@@ -11,13 +12,13 @@ import com.baomidou.mybatisplus.service.IService;
  * @author llchen12
  * @since 2018-05-03
  */
-public interface IOrderService extends IService<Order> {
+public interface IOrderService extends IService<Orders> {
 
 
     /**
      * 下订单
      * @param order 订单
      */
-    void placeOrder(Order order);
+    void placeOrder(Orders order);
 
 }

@@ -24,6 +24,20 @@ public class ProductServiceImpl extends ServiceImpl<ProductMapper, Product> impl
     @TxTransaction
     public Integer calculateMoney(Integer pid, Integer pnum) {
 
-        return null;
+        Product product = this.baseMapper.selectById(pid);
+        if (product==null){
+            throw new RuntimeException("该商品不存在！");
+        }
+        Integer res=product.getStock()-pnum;
+        if (res<0){
+            throw new RuntimeException("库存不足！");
+        }
+        product.setStock(res);
+
+        Integer res1 = this.baseMapper.updateById(product);
+        if (res1!=1){
+            throw new RuntimeException("更新库存失败");
+        }
+        return product.getPrice()*pnum;
     }
 }
