@@ -7,14 +7,14 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="distributed-transaction" />
-        <module name="lcn-product" />
-      </profile>
-      <profile name="Annotation profile for lcn-sample" enabled="true">
-        <sourceOutputDir name="../lcn-product/target/generated-sources/annotations" />
-        <sourceTestOutputDir name="../lcn-product/target/generated-test-sources/test-annotations" />
-        <outputRelativeToContentRoot value="true" />
+        <module name="eureka-server" />
+        <module name="lcn-account" />
         <module name="lcn-order" />
+        <module name="lcn-product" />
+        <module name="pack-booking" />
+        <module name="pack-car" />
+        <module name="pack-hotel" />
+        <module name="rocketmq-order" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>

@@ -6,8 +6,14 @@
 
     <groupId>com.iflytek</groupId>
     <artifactId>distributed-transaction</artifactId>
+    <packaging>pom</packaging>
     <version>1.0-SNAPSHOT</version>
+    <modules>
+        <module>rocketmq-sample</module>
+        <module>lcn-sample</module>
+        <module>saga-sample</module>
+        <module>eureka-server</module>
+    </modules>
 
 
-    
 </project>
