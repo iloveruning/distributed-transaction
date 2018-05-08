@@ -149,7 +149,7 @@ public class RocketmqOrderApplicationTests {
         //设置一个Listener，主要进行消息的逻辑处理
         consumer.registerMessageListener(new MessageListenerConcurrently() {
 
-            @Override
+
             public ConsumeConcurrentlyStatus consumeMessage(List<MessageExt> msgs,
                                                             ConsumeConcurrentlyContext context) {
 

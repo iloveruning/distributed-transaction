@@ -12,7 +12,8 @@
 
     <modules>
         <module>lcn-order</module>
-        <module>lcn-product</module>
+        <module>lcn-account</module>
+        <module>lcn-prod</module>
     </modules>
 
     <parent>

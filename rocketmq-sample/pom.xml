@@ -29,12 +29,13 @@
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
 
-
+        <!-- https://mvnrepository.com/artifact/com.rabbitmq/amqp-client -->
         <dependency>
-            <groupId>org.bytesoft</groupId>
-            <artifactId>bytetcc-supports-springcloud</artifactId>
-            <version>0.4.13</version>
+            <groupId>com.rabbitmq</groupId>
+            <artifactId>amqp-client</artifactId>
+            <version>5.2.0</version>
         </dependency>
+
     </dependencies>
 
     <build>

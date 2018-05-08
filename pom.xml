@@ -21,6 +21,7 @@
         <module>saga-sample</module>
         <module>eureka-server</module>
         <module>bytetcc-sample</module>
+        <module>reliable-message</module>
     </modules>
 
     <properties>
@@ -31,7 +32,19 @@
         <lcn.last.version>4.1.0</lcn.last.version>
         <saga.version>0.1.0</saga.version>
         <spring-boot.version>1.5.12.RELEASE</spring-boot.version>
+        <bytetcc.version>0.4.13</bytetcc.version>
     </properties>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.mybatis.spring.boot</groupId>
+                <artifactId>mybatis-spring-boot-starter</artifactId>
+                <version>1.3.2</version>
+            </dependency>
+        </dependencies>
+
+    </dependencyManagement>
 
 
 </project>

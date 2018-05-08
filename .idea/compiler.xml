@@ -8,18 +8,24 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="bytetccsample" />
+        <module name="consumer" />
         <module name="eureka-server" />
         <module name="lcn-account" />
         <module name="lcn-order" />
-        <module name="lcn-product" />
+        <module name="lcnprod" />
+        <module name="messageapi" />
+        <module name="messageservice" />
         <module name="pack-booking" />
         <module name="pack-car" />
         <module name="pack-hotel" />
+        <module name="provider" />
         <module name="rocketmq-order" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="lcn-order (1)" target="1.8" />
+      <module name="lcn-product" target="1.8" />
+      <module name="lcnproduct" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>
