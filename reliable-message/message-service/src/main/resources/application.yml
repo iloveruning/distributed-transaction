@@ -3,7 +3,7 @@ server:
 
 spring:
     application:
-      name: lcn-order
+      name: relible-message
     datasource:
         type: com.alibaba.druid.pool.DruidDataSource
         driverClassName: com.mysql.jdbc.Driver
@@ -15,7 +15,7 @@ spring:
             password: imsp_vcloud
             initial-size: 2
             max-active: 10
-            min-idle: 1
+            min-idle: 2
             max-wait: 60000
             pool-prepared-statements: true
             max-pool-prepared-statement-per-connection-size: 20
@@ -42,6 +42,8 @@ spring:
       addresses: 127.0.0.1:5672
       username: guest
       password: guest
+
+
 
 
 eureka:
@@ -86,3 +88,9 @@ mybatis-plus:
     lazyLoadingEnabled: true
     default-executor-type: reuse
     multipleResultSetsEnabled: true #开启的话，延时加载一个属性时会加载该对象全部属性，否则按需加载属性
+
+logging:
+  level: debug
+
+
+

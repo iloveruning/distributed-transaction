@@ -9,6 +9,7 @@
         <outputRelativeToContentRoot value="true" />
         <module name="bytetccsample" />
         <module name="consumer" />
+        <module name="consumers" />
         <module name="eureka-server" />
         <module name="lcn-account" />
         <module name="lcn-order" />
@@ -18,6 +19,7 @@
         <module name="pack-booking" />
         <module name="pack-car" />
         <module name="pack-hotel" />
+        <module name="producer" />
         <module name="provider" />
         <module name="rocketmq-order" />
       </profile>

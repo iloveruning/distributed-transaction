@@ -1,5 +1,6 @@
 package com.iflytek.message.service;
 
+import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.iflytek.message.api.MessageBizException;
 import com.iflytek.message.api.MessageStatus;
 import com.iflytek.message.api.TransactionMessage;
@@ -34,37 +35,66 @@ public class TransactionMessageServiceImpl implements TransactionMessageService 
     @Override
     public boolean sendPrepareMessage(TransactionMessage message) throws MessageBizException {
 
-       checkMessage(message);
+        checkMessage(message);
 
-        TMsg tMsg=new TMsg(message);
+        TMsg tMsg = new TMsg(message);
         tMsg.setStatus(MessageStatus.PREPARE.getStatus());
 
-        return tMsgMapper.insert(tMsg)==1;
+        return tMsgMapper.insert(tMsg) == 1;
     }
 
     @Override
     public boolean confirmMessage(String msgId) throws MessageBizException {
 
-        final TransactionMessage msg = getMessageById(msgId);
-        if (msg==null){
+        final TMsg msg = getTMsgByMsgId(msgId);
+        if (msg == null) {
             throw new MessageBizException("根据消息id查找的消息为空");
         }
-        TMsg tMsg=new TMsg(msg);
-        tMsg.setStatus(MessageStatus.CONFIRM.getStatus());
-        Integer res=tMsgMapper.updateById(tMsg);
-
-        if (res==1){
-            rabbitMq.convertAndSend(tMsg.getQueue(),tMsg.toMsg());
-            return true;
+        int status = msg.getStatus();
+        if (status == MessageStatus.PREPARE.getStatus()) {
+            msg.setStatus(MessageStatus.SENDING.getStatus());
+            Integer res = tMsgMapper.updateById(msg);
+            if (res == 1) {
+                rabbitMq.convertAndSend(msg.getConsumerQueue(), msg.toMsg());
+                return true;
+            }
+        } else if (status == MessageStatus.SENDING.getStatus()) {
+            return tMsgMapper.deleteById(msg.getId()) == 1;
         }
 
         return false;
     }
 
     @Override
+    public void sendProducerCallbackMessage(TransactionMessage message) throws MessageBizException {
+        if (message == null) {
+            throw new MessageBizException("发送的消息为空");
+        }
+
+        if (StringUtils.isEmpty(message.getPqueue())) {
+            throw new MessageBizException("回调的生产者队列不能为空");
+        }
+
+        this.rabbitMq.convertAndSend(message.getPqueue(), message.ToMsg());
+    }
+
+    @Override
+    public void sendConsumerCallbackMessage(TransactionMessage message) throws MessageBizException {
+        if (message == null) {
+            throw new MessageBizException("发送的消息为空");
+        }
+
+        if (StringUtils.isEmpty(message.getCqueue())) {
+            throw new MessageBizException("回调的消费者队列不能为空");
+        }
+
+        this.rabbitMq.convertAndSend(message.getCqueue(), message.ToMsg());
+    }
+
+    @Override
     public void sendDirectMessage(TransactionMessage message) throws MessageBizException {
         checkMessage(message);
-        this.rabbitMq.convertAndSend(message.getConsumerQueue(), message.ToMsg());
+        this.rabbitMq.convertAndSend(message.getCqueue(), message.ToMsg());
 
     }
 
@@ -72,11 +102,18 @@ public class TransactionMessageServiceImpl implements TransactionMessageService 
     public void markDeadMessage(String msgId) throws MessageBizException {
 
         final TransactionMessage msg = getMessageById(msgId);
-        if (msg==null){
-            throw new MessageBizException( "根据消息id查找的消息为空");
+        if (msg == null) {
+            throw new MessageBizException("根据消息id查找的消息为空");
         }
 
-        TMsg tMsg=new TMsg(msg);
+        TMsg tMsg = new TMsg(msg);
+        tMsg.setStatus(MessageStatus.DEAD.getStatus());
+
+        tMsgMapper.updateById(tMsg);
+    }
+
+    public void markDeadMessage(TMsg tMsg) throws MessageBizException {
+
         tMsg.setStatus(MessageStatus.DEAD.getStatus());
 
         tMsgMapper.updateById(tMsg);
@@ -85,24 +122,29 @@ public class TransactionMessageServiceImpl implements TransactionMessageService 
     @Override
     public TransactionMessage getMessageById(String msgId) {
 
-        TMsg tMsg = tMsgMapper.selectById(msgId);
-        if (tMsg==null){
+        TMsg tMsg = tMsgMapper.findByMsgId(msgId);
+        if (tMsg == null) {
             return null;
         }
         return tMsg.toTranMsg();
     }
 
-    @Override
-    public boolean deleteMessageById(String msgId) {
-        return tMsgMapper.deleteById(msgId)==1;
+
+    private TMsg getTMsgByMsgId(String msgId) {
+        return tMsgMapper.findByMsgId(msgId);
     }
 
-    private void checkMessage(TransactionMessage message) throws MessageBizException{
+    @Override
+    public boolean deleteMessageById(String msgId) {
+        return tMsgMapper.delete(new EntityWrapper<TMsg>().eq("msg_id", msgId)) == 1;
+    }
+
+    private void checkMessage(TransactionMessage message) throws MessageBizException {
         if (message == null) {
             throw new MessageBizException("保存的消息为空");
         }
 
-        if (StringUtils.isEmpty(message.getConsumerQueue())) {
+        if (StringUtils.isEmpty(message.getCqueue())) {
             throw new MessageBizException("消息的消费队列不能为空");
         }
     }

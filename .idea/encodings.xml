@@ -10,9 +10,11 @@
     <file url="file://$PROJECT_DIR$/lcn-sample/lcn-account" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/lcn-sample/lcn-order" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/lcn-sample/lcn-prod" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/lcn-sample/lcn-product" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/reliable-message" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/reliable-message/message-api" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/reliable-message/message-sample" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/reliable-message/message-sample/consumer" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/reliable-message/message-sample/producer" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/reliable-message/message-service" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/rocketmq-sample" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/rocketmq-sample/rocketmq-order" charset="UTF-8" />

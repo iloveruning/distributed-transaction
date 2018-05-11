@@ -6,9 +6,12 @@ package com.iflytek.message.api;
  */
 public enum MessageStatus {
 
-    SENDING(0,"发送中"),
+    DEFAULT(0, "默认状态"),
+
     PREPARE(1,"待确认状态"),
-    CONFIRM(2,"已确认状态"),
+
+    SENDING(2,"发送状态"),
+
     DEAD(3,"死亡状态");
 
 

@@ -1,5 +1,8 @@
 package com.iflytek.message.api;
 
+import com.alibaba.fastjson.JSON;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.io.Serializable;
 
 /**
@@ -8,12 +11,23 @@ import java.io.Serializable;
  */
 public class Message implements Serializable {
 
+    private static final long serialVersionUID = 1757377434564546156L;
+
+
     private String id;
     private String body;
 
-    public Message(String id, String body) {
+    public Message() {
+    }
+
+    public Message(String id, Object body) {
         this.id = id;
-        this.body = body;
+        if (body instanceof String) {
+            this.body = (String) body;
+        } else {
+            this.body = JSON.toJSONString(body);
+        }
+
     }
 
     public String getId() {
@@ -38,5 +52,9 @@ public class Message implements Serializable {
                 "id='" + id + '\'' +
                 ", body='" + body + '\'' +
                 '}';
+    }
+
+    public <T> T convert(Class<T> clazz) {
+        return JSON.parseObject(this.body, clazz);
     }
 }

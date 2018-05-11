@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.iflytek.message.dao.TMsgMapper">
+
+
+    <update id="updateStatus">
+        update t_msg set status=#{status} where id=#{id}
+    </update>
+
+    <update id="updateProducerTry">
+        update t_msg set producer_try=#{ptry} where id=#{id}
+    </update>
+
+    <update id="updateConsumerTry">
+        update t_msg set consumer_try=#{ctry} where id=#{id}
+    </update>
+
+
+    <select id="findByMsgId" resultType="com.iflytek.message.entity.TMsg">
+        select * from t_msg where msg_id=#{msgId}
+    </select>
+</mapper>

@@ -12,9 +12,23 @@
     <modules>
         <module>message-api</module>
         <module>message-service</module>
+        <module>message-sample</module>
     </modules>
     <artifactId>reliable-message</artifactId>
     <name>reliable-message</name>
 
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
 
+        <!-- fastjson -->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+            <version>1.2.47</version>
+        </dependency>
+
+    </dependencies>
 </project>

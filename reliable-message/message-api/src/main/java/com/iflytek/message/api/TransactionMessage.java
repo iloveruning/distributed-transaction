@@ -1,5 +1,7 @@
 package com.iflytek.message.api;
 
+
+
 import java.io.Serializable;
 
 /**
@@ -10,13 +12,68 @@ public class TransactionMessage extends Message implements Serializable {
 
     private static final long serialVersionUID = 1757377457814546156L;
 
-    private Integer status;
-    private String consumerQueue;
 
-    public TransactionMessage(String id,String body,String consumerQueue){
+    private Integer status;
+
+    private Integer producerRetry;
+
+    private Integer consumerRetry;
+
+    private String pqueue;
+
+    private String cqueue;
+
+
+    public TransactionMessage(){
+        super();
+    }
+    public TransactionMessage(String id,Object body,String producerQueue,String consumerQueue){
+        this(id,body,producerQueue,consumerQueue,1,3);
+    }
+
+    public TransactionMessage(String id,Object body,String producerQueue,String consumerQueue,Integer producerRetry,Integer consumerRetry){
+       this(id, body, producerQueue, consumerQueue,producerRetry,consumerRetry,MessageStatus.DEFAULT.getStatus());
+    }
+
+    public TransactionMessage(String id,Object body,String producerQueue,String consumerQueue,Integer producerRetry,Integer consumerRetry,Integer status){
         super(id,body);
-        this.consumerQueue=consumerQueue;
-        this.status=MessageStatus.SENDING.getStatus();
+        this.pqueue=producerQueue;
+        this.cqueue=consumerQueue;
+        this.producerRetry=producerRetry;
+        this.consumerRetry=consumerRetry;
+        this.status=status;
+    }
+
+    public Integer getProducerRetry() {
+        return producerRetry;
+    }
+
+    public void setProducerRetry(Integer producerRetry) {
+        this.producerRetry = producerRetry;
+    }
+
+    public Integer getConsumerRetry() {
+        return consumerRetry;
+    }
+
+    public void setConsumerRetry(Integer consumerRetry) {
+        this.consumerRetry = consumerRetry;
+    }
+
+    public String getPqueue() {
+        return pqueue;
+    }
+
+    public void setPqueue(String pqueue) {
+        this.pqueue = pqueue;
+    }
+
+    public String getCqueue() {
+        return cqueue;
+    }
+
+    public void setCqueue(String cqueue) {
+        this.cqueue = cqueue;
     }
 
     public Message ToMsg(){
@@ -31,13 +88,9 @@ public class TransactionMessage extends Message implements Serializable {
         this.status = status;
     }
 
-    public String getConsumerQueue() {
-        return consumerQueue;
-    }
 
-    public void setConsumerQueue(String queue) {
-        this.consumerQueue = queue;
-    }
+
+
 
     @Override
     public String toString() {
@@ -45,7 +98,10 @@ public class TransactionMessage extends Message implements Serializable {
                 "id='" + getId() + '\'' +
                 ", body='" + getBody() + '\'' +
                 ", status=" + status +
-                ", consumerQueue='" + consumerQueue + '\'' +
+                ", producerRetry=" + producerRetry +
+                ", consumerRetry=" + consumerRetry +
+                ", producerQueue='" + pqueue + '\'' +
+                ", consumerQueue='" + cqueue + '\'' +
                 '}';
     }
 }
